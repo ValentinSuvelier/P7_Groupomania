@@ -25,6 +25,7 @@ exports.createPost = (req, res, next) => {
 // DELETE
 exports.deletePost = (req, res, next) => {
     Post.findByPk(req.params.id)
+    // ici on veut que l'image soit supprimé en même temps que notre post
       .then(post => {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {

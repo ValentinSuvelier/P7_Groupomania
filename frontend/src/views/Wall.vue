@@ -7,7 +7,10 @@
 
     <!-- Partie Post -->
     <div v-for="post in posts.slice().reverse()" :key="post.username" class="post-design">
-        <p class="user-post">Posté par {{ post.username }} le {{ post.createdAt.split("T")[0].split("-").reverse().join("/") + ", à " + post.createdAt.split("T")[1].split(":").slice(0,-1).join(":") }}</p>
+        <div class="header-post">
+            <p class="user-post">Posté par {{ post.username }}</p>
+            <p class="post-date">le {{ post.createdAt.split("T")[0].split("-").reverse().join("/") + ", à " + post.createdAt.split("T")[1].split(":").slice(0,-1).join(":") }}</p>
+        </div>
         <p class="title-post">{{ post.title }}</p>
         <p class="content-post">{{ post.content }}</p>
         <div class="img-container">
@@ -31,7 +34,10 @@
                 <h4>{{ errMsg }}</h4>
             </div>
             <div v-for="comment in post.comments" :key="comment.id" class="response-box">
-                <p class="user-post">{{ comment.username }} le {{ post.createdAt.split("T")[0].split("-").reverse().join("/") + ", à " + post.createdAt.split("T")[1].split(":").slice(0,-1).join(":") }}</p>
+                <div class="header-comment">
+                    <p class="user-post">{{ comment.username }}</p>
+                    <p class="comment-date">le {{ post.createdAt.split("T")[0].split("-").reverse().join("/") + ", à " + post.createdAt.split("T")[1].split(":").slice(0,-1).join(":") }}</p>
+                </div>
                 <p>{{ comment.content }}</p>
                 <button class="btn red" @click="deleteComment(comment.id)" v-if="comment.username == this.username || this.$store.state.user.isAdmin == 1">Supprimer</button>
             </div>
@@ -151,9 +157,11 @@ export default {
     border: solid 5px #DEEBFF;
     box-shadow: 3px 3px 10px #CCCCCC;
 }
-.user-post {
+.header-post, .header-comment {
     display: flex;
-    margin: 1rem;
+    justify-content: space-around;
+}
+.user-post {
     font-weight: bold;
 }
 .title-post {
@@ -178,7 +186,7 @@ export default {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
 }
 .border-bottom {
     margin: 2rem auto;
