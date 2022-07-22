@@ -1,5 +1,11 @@
+require('dotenv').config()
+
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize("groupomania", "root", "sv121094", {
+// on masque les info sensibles de connexion à MySQL avec dotenv
+const sequelize = new Sequelize(
+  process.env.DB_DATABASE, 
+  process.env.DB_USER, 
+  process.env.DB_PASSWORD, {
   host: "localhost",
   dialect: "mysql",
 });
