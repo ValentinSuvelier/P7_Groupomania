@@ -26,6 +26,13 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
     });
-  
+    
+    // un post appartient à un User, si celui-ci est supprimé le Post le sera aussi
+    // Post.associate = models => {
+    //   Post.belongsTo(models.User, {
+    //       onDelete: "cascade"
+    //   });
+    // }
+
     return Post;
   };

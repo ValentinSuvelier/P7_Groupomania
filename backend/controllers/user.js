@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const db = require('../models/index');
 const User = db.user;
 
+const Post = db.posts;
+const Comment = db.comments;
+
 //Inscription
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 8)

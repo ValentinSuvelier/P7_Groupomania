@@ -25,7 +25,7 @@ exports.createPost = (req, res, next) => {
 // DELETE
 exports.deletePost = (req, res, next) => {
     Post.findByPk(req.params.id)
-    // ici on veut que l'image soit supprimé en même temps que notre post
+    // ici on veut que l'image soit supprimée en même temps que notre post
       .then(post => {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
@@ -47,15 +47,3 @@ exports.getAllPost = (req, res, next) => {
         })
         .catch(err => res.status(400).json(err))
 };
-
-//MODIFY
-exports.updatePost = (req, res, next) => {
-    const postObject = req.file ?
-      {
-        ...JSON.parse(req.body.post),
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      } : { ...req.body };
-    Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
-      .then(() => res.status(200).json({ message: 'Objet modifié !'}))
-      .catch(error => res.status(400).json({ error }));
-  };
