@@ -81,19 +81,15 @@
     .img-box{
         width: 40%;
     }
+    .nav {
+        font-size: 0.8rem;
+    }
 }
 
 @media all and (max-width: 580px)
 {
     .nav{
         margin: auto;
-    }
-}
-
-@media all and (max-width: 425px)
-{
-    .nav{
-        font-size: 1rem;
     }
 }
 </style>

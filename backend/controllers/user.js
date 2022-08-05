@@ -3,9 +3,6 @@ const jwt = require('jsonwebtoken');
 const db = require('../models/index');
 const User = db.user;
 
-const Post = db.posts;
-const Comment = db.comments;
-
 //Inscription
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 8)
@@ -24,7 +21,7 @@ exports.signup = (req, res, next) => {
   };
 
 
-//Connexion d'un utilisateur existant
+//Connexion d'un utilisateur existant dans la DB
 exports.login = (req, res, next) => {
     User.findOne({ where:{ email: req.body.email }})
     .then(user => {

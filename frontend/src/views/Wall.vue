@@ -18,11 +18,11 @@
         </div>
         <div class="footer-post">
             <button class="btn red" @click="deletePost(post.id)" v-if="post.username == this.username || this.$store.state.user.isAdmin == 1">Supprimer</button>
-            <button class="btn blue" @click="showResponse = !showResponse">Répondre</button>
+            <button class="btn blue" @click="showResponse = !showResponse">Afficher / Masquer</button>
         </div>
         <!-- Partie Comment -->
-        <div class="comment">
-            <div class="form-comment" v-show="showResponse">
+        <div class="comment" v-show="showResponse">
+            <div class="form-comment">
                 <form>
                     <div>
                         <textarea v-model="contentComment" class="input-comment" placeholder="Ecrivez votre réponse" type="text"></textarea>
@@ -36,7 +36,7 @@
             <div v-for="comment in post.comments" :key="comment.id" class="response-box">
                 <div class="header-comment">
                     <p class="user-post">{{ comment.username }}</p>
-                    <p class="comment-date">le {{ post.createdAt.split("T")[0].split("-").reverse().join("/") + ", à " + post.createdAt.split("T")[1].split(":").slice(0,-1).join(":") }}</p>
+                    <p class="comment-date">le {{ comment.createdAt.split("T")[0].split("-").reverse().join("/") + ", à " + comment.createdAt.split("T")[1].split(":").slice(0,-1).join(":") }}</p>
                 </div>
                 <p>{{ comment.content }}</p>
                 <button class="btn red" @click="deleteComment(comment.id)" v-if="comment.username == this.username || this.$store.state.user.isAdmin == 1">Supprimer</button>
@@ -105,7 +105,8 @@ export default {
             const data = {
                 username: this.$store.state.user.firstname + " " + this.$store.state.user.lastname,
                 content: this.contentComment,
-                PostId: id,
+                postId: id,
+                userId: this.$store.state.user.id,
             }
 
             commentService.createComment(data)
@@ -123,7 +124,7 @@ export default {
     },
     computed: {
         isLoggedIn(){
-        return this.$store.state.status.loggedIn
+            return this.$store.state.status.loggedIn
         },
         currentUser(){
             return this.$store.state.user

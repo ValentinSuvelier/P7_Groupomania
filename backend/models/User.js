@@ -31,13 +31,6 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
     });
-  
-    // l'utilisateur peut avoir plusieur posts, si l'utilisateur est supprimé ces posts le seront aussi
-    // User.associate = models => {
-    //   User.hasMany(models.Post, {
-    //       onDelete: "cascade"
-    //   });
-    // }
 
     return User;
   };

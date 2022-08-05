@@ -6,7 +6,8 @@ exports.createComment = (req, res, next) => {
     const comment = new Comment({
         username: req.body.username,
         content: req.body.content,
-        postId: req.body.PostId,
+        postId: req.body.postId,
+        userId: req.body.userId,
     })
     comment.save()
         .then(() => {

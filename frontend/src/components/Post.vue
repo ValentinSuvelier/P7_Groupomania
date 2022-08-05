@@ -58,6 +58,7 @@ export default {
             const data = new FormData();
             data.append('image', this.file, this.file.name);
             data.append('title', this.titlePost);
+            data.append('userId', this.$store.state.user.id);
             data.append('content', this.contentPost);
             data.append('username', (this.$store.state.user.firstname + " " + this.$store.state.user.lastname));
 
@@ -69,8 +70,7 @@ export default {
                 })
                 .catch((error) => console.log(error))
 
-            // recharge la page pour afficher le Post
-            window.location.reload();
+            location.reload();
         }
     },
     computed: {
@@ -107,16 +107,17 @@ form {
     align-items: center;
 }
 .input-title {
-    width: 35%;
+    width: 25%;
     height: 1.8rem;
     font-size: 1.5rem;
     border-radius: 1rem;
 }
 .input-text {
     font-size: 1.2rem;
+    padding: 1rem;
     border-radius: 1rem;
-    width: 60%;
-    height: 10rem;
+    width: 40%;
+    height: 7rem;
 }
 .input-title, .file, .input-text {
     margin-bottom: 1rem;
@@ -134,8 +135,11 @@ form {
 
 @media all and (max-width: 768px)
 {
-    .input-title, .input-text {
+    .input-text {
         width: 90%;
+    }
+    .input-title {
+        width: 50%;
     }
 }
 </style>

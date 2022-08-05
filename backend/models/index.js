@@ -22,12 +22,6 @@ db.comments = require("./Comment.js")(sequelize, Sequelize);
 
 // RELATION ONETOMANY //
 
-// supprime les commentaires contenu dans le post supprimé
-db.comments.belongsTo(db.user, {
-  onDelete: "CASCADE",
-  });
-db.user.hasMany(db.comments);
-
 db.posts.belongsTo(db.user, {
   onDelete: "CASCADE",
   });
@@ -38,6 +32,9 @@ db.comments.belongsTo(db.posts, {
   });
 db.posts.hasMany(db.comments);
 
-
+db.comments.belongsTo(db.user, {
+  onDelete: "CASCADE",
+  });
+db.user.hasMany(db.comments);
 
 module.exports = db;
