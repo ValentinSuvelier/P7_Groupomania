@@ -34,7 +34,6 @@ export default {
         }
     },
     methods: {
-        // quand on click sur le bouton d'inscription
         onSubmit() {
             /* assigne les valeurs entrées du formulaire à l'objet data */
             const data = {

@@ -7,8 +7,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       imageUrl: {
         type: Sequelize.STRING,
-        required: true,
-        allowNull: false,
+        allowNull: true,
       },
       username: {
         type: Sequelize.STRING,

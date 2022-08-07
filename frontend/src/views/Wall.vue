@@ -1,5 +1,4 @@
 <template>
-    <Nav />
 
     <h1>Bienvenu sur Groupomania !</h1>
 
@@ -47,7 +46,6 @@
 
 <script>
 import commentService from "../services/commentService.js"
-import Nav from "../components/Nav.vue"
 import Post from "../components/Post.vue"
 import userService from "../services/userService.js"
 import postService from "../services/postService.js"
@@ -65,8 +63,7 @@ export default {
         }
     },
     components: {
-        Nav,
-        Post
+        Post,
     },
     methods: {
         deleteComment(id){

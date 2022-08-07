@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <div>
         <div class="nav">
 
             <div class="img-box">
@@ -21,7 +21,7 @@
 
         </div>
         <div class="border-bottom"></div>
-    </nav>
+    </div>
 </template>
 
 <script>
@@ -34,10 +34,8 @@
     },
     methods: {
         logout() { 
-            /* pour déconnecter l'user on appelle la méthode clear() pour effacer tous les items dans localStorage */
-            this.$store.dispatch('logout')
             this.$router.push('/')
-            console.log("user déconnecté")
+            this.$store.dispatch('logout')
         }
     }
 }

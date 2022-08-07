@@ -1,37 +1,35 @@
 <template>
-    <Nav />
-        <div class="grid-profile">
-            <h1>Mon profil</h1>
-            <div class="profile-container">
-                <div class="form">
-                    <div class="lastname-grid nom-data">
-                        <p class="profile-title">Nom</p> 
-                        <p>{{ currentUser.lastname }}</p>
-                    </div>
-                    <div class="firstname-grid prenom-data">
-                        <p class="profile-title">Prénom</p>
-                        <p>{{ currentUser.firstname }}</p>
-                    </div>
-                    <div class="email-grid adresse-data">
-                        <p class="profile-title">Adresse mail</p>
-                        <p>{{ currentUser.email }}</p>
-                    </div>
-                    <div class="password-grid statut-data">
-                        <p class="profile-title">Statut</p>
-                        <p v-if="currentUser.isAdmin == 1">Administrateur</p>
-                        <p v-else>Utilisateur</p>
-                    </div>
-                        <button class="btn danger" @click="deleteAccount">Supprimer mon compte</button>
+    <div class="grid-profile">
+        <h1>Mon profil</h1>
+        <div class="profile-container">
+            <div class="form">
+                <div class="lastname-grid nom-data">
+                    <p class="profile-title">Nom</p> 
+                    <p>{{ currentUser.lastname }}</p>
                 </div>
+                <div class="firstname-grid prenom-data">
+                    <p class="profile-title">Prénom</p>
+                    <p>{{ currentUser.firstname }}</p>
+                </div>
+                <div class="email-grid adresse-data">
+                    <p class="profile-title">Adresse mail</p>
+                    <p>{{ currentUser.email }}</p>
+                </div>
+                <div class="password-grid statut-data">
+                    <p class="profile-title">Statut</p>
+                    <p v-if="currentUser.isAdmin == 1">Administrateur</p>
+                    <p v-else>Utilisateur</p>
+                </div>
+                <button class="btn danger" @click="deleteAccount">Supprimer mon compte</button>
             </div>
         </div>
+    </div>
     <div class="return-home">
         <router-link to="/wall">Retourner à l'accueil</router-link>
     </div>
 </template>
 
 <script>
-import Nav from "../components/Nav.vue"
 import userService from "../services/userService.js"
 
 export default {
@@ -46,9 +44,6 @@ export default {
             },
             errMsg: null
         }
-    },
-    components: {
-        Nav
     },
     methods: {
         deleteAccount(){

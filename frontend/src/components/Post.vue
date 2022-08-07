@@ -29,6 +29,7 @@ export default {
     name: 'Post-groupomania',
     data() {
         return {
+            check: 0,
             file: "",
             contentPost: "",
             titlePost: "",
@@ -37,6 +38,7 @@ export default {
     },
     methods: {
         onFileSelected() {
+            this.check = 1;
             const file = this.$refs.file.files[0];
             this.file = file;
         },
@@ -46,17 +48,11 @@ export default {
                 this.errMsg = "Veuillez remplir tout les champs du formulaire"
                 return
             }
-
-            /* Post sans images */
-            // const data = {
-            //     content: this.contentPost, 
-            //     username: this.$store.state.user.firstname,
-            //     title: this.titlePost
-            // }
-
             /* Post avec images */
             const data = new FormData();
-            data.append('image', this.file, this.file.name);
+            if(this.check == 1) {
+                data.append('image', this.file, this.file.name);
+            }
             data.append('title', this.titlePost);
             data.append('userId', this.$store.state.user.id);
             data.append('content', this.contentPost);

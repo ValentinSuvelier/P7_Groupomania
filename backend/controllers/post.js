@@ -7,11 +7,15 @@ const Comment = db.comments;
 exports.createPost = (req, res, next) => {
     console.log(req.body)
     const postObject = req.body;
-    const post = new Post({
+    const post = req.file ?
+    //si req.file existe il prend le body et l'image sinon il prend le body sans image (ternaire)
+    {
         ...postObject,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    })
-    post.save()
+    } : {
+        ...postObject
+    }
+    Post.create(post)
         .then(() => {
             res.status(201).json({
                 message: 'post créée !'
@@ -27,12 +31,18 @@ exports.deletePost = (req, res, next) => {
     Post.findByPk(req.params.id)
     // ici on veut que l'image soit supprimée en même temps que notre post
       .then(post => {
-        const filename = post.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {
-          Post.destroy({where: { id: req.params.id }})
+          if(post.imageUrl) {
+            const filename = post.imageUrl.split('/images/')[1];
+            fs.unlink(`images/${filename}`, () => {
+              Post.destroy({where: { id: req.params.id }})
+                .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+                .catch(error => res.status(400).json({ error }));
+            });
+          } else {
+            Post.destroy({where: { id: req.params.id }})
             .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
             .catch(error => res.status(400).json({ error }));
-        });
+          }
       })
       .catch(error => res.status(500).json({ error }));
 };

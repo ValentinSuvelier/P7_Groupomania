@@ -1,5 +1,4 @@
 <template>
-    <Nav />
 
     <h1>Bienvenu sur votre AdminBoard !</h1>
 
@@ -33,7 +32,6 @@
 </template>
 
 <script>
-import Nav from "../components/Nav.vue"
 import userService from "../services/userService.js"
 
 export default {
@@ -42,9 +40,6 @@ export default {
         return {
             users: []
         }
-    },
-    components: {
-        Nav
     },
     methods: {
         deleteAccount(id){

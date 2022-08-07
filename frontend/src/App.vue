@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div>
+    <Navbar v-if="currentUser"/>
     <router-view />
   </div>
   <Footer />
@@ -7,15 +8,20 @@
 
 <script>
 import Footer from "./components/Footer.vue"
+import Navbar from "./components/Nav.vue"
 
 export default {
 	name: "App",
   components: {
-        Footer
+        Footer,
+        Navbar
   },
   computed: {
     isLoggedIn(){
       return this.$store.state.status.loggedIn
+    },
+    currentUser(){
+        return this.$store.state.user
     }
   },
   
