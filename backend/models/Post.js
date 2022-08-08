@@ -24,6 +24,10 @@ module.exports = (sequelize, Sequelize) => {
         required: true,
         allowNull: false,
       },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
     });
     
     return Post;

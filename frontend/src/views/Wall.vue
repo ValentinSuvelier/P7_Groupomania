@@ -8,7 +8,7 @@
     <div v-for="post in posts.slice().reverse()" :key="post.username" class="post-design">
         <div class="header-post">
             <p class="user-post">Posté par {{ post.username }}</p>
-            <p class="post-date">le {{ post.createdAt.split("T")[0].split("-").reverse().join("/") + ", à " + post.createdAt.split("T")[1].split(":").slice(0,-1).join(":") }}</p>
+            <p class="post-date">le {{ post.createdAt }}</p>
         </div>
         <p class="title-post">{{ post.title }}</p>
         <p class="content-post">{{ post.content }}</p>
@@ -35,7 +35,7 @@
             <div v-for="comment in post.comments" :key="comment.id" class="response-box">
                 <div class="header-comment">
                     <p class="user-post">{{ comment.username }}</p>
-                    <p class="comment-date">le {{ comment.createdAt.split("T")[0].split("-").reverse().join("/") + ", à " + comment.createdAt.split("T")[1].split(":").slice(0,-1).join(":") }}</p>
+                    <p class="comment-date">le {{ comment.createdAt }}</p>
                 </div>
                 <p>{{ comment.content }}</p>
                 <button class="btn red" @click="deleteComment(comment.id)" v-if="comment.username == this.username || this.$store.state.user.isAdmin == 1">Supprimer</button>
@@ -67,6 +67,7 @@ export default {
     },
     methods: {
         deleteComment(id){
+            // axios.delete
             commentService.deleteComment(id)
                 .then(() => {
                     postService.getAllPost()
@@ -80,6 +81,7 @@ export default {
             .catch(error => console.log(error));
         },
         deletePost(id){
+            // axios.delete
             postService.deletePost(id)
                 .then(() => {
                     postService.getAllPost()
@@ -106,6 +108,7 @@ export default {
                 userId: this.$store.state.user.id,
             }
 
+            // axios.post
             commentService.createComment(data)
                 .then(()=> {
                     this.contentComment = "";
@@ -129,7 +132,6 @@ export default {
     },
     // avant que l'HTML soit généré
     mounted(){
-        console.log(this.$store.state.status.loggedIn)
         if (this.$store.state.status.loggedIn == false){
             this.$router.push('/')
         }

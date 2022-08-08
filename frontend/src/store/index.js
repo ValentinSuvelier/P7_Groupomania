@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 import userService from '../services/userService.js'
 
 const user = JSON.parse(localStorage.getItem('userData'));
-// si user connecté logged true sinon logged false
+// interoge le localstorage, si user connecté logged true sinon logged false
 const initalState = user
   ? {status: {loggedIn: true}, user}
   : {status: {loggedIn: false}, user: null}

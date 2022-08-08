@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+
 const Sequelize = require("sequelize");
 // on masque les info sensibles de connexion à MySQL avec dotenv
 const sequelize = new Sequelize(
@@ -8,6 +9,13 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD, {
   host: "localhost",
   dialect: "mysql",
+  dialectOptions: {
+    // useUTC: false, //for reading from database
+    dateStrings: true,
+    typeCast: true,
+    timezone: "+02:00"
+  },
+  timezone: "+02:00", //for writing to database
 });
 
 const db = {};

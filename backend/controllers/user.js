@@ -47,7 +47,7 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-//GET ALL POSTS
+//GET ALL USERS
 exports.getAllUsers = (req, res, next) => {
   User.findAll()
       .then((users) => {
